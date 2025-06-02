@@ -65,8 +65,8 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_PRIVATE_KEY }}
         script: |
-            cd
-            docker-compose down
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions
-            docker-compose up -d
-            docker image prune -a -f
+          cd
+          /usr/local/bin/docker-compose down
+          /usr/bin/docker pull ${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions
+          /usr/local/bin/docker-compose up -d
+          /usr/bin/docker image prune -a -f
