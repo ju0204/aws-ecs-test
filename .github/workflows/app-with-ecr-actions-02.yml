@@ -57,10 +57,13 @@ jobs:
       - name: Create Short SHA
         run: echo "Short_SHA=${GITHUB_SHA::7} >> $GITHUB_ENV"
 
+      - name: Check Short_SHA
+        run: echo "Short SHA is ${{ env.Short_SHA }}"
+
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:${{ github.env.Short_SHA }} .
+          docker build -t ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:${{ env.Short_SHA }} .
 
       - name: Push Docker image to Amazon ECR
         run: |
-          docker push ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:${{ github.env.Short_SHA }}
+          docker push ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:${{ env.Short_SHA }}
