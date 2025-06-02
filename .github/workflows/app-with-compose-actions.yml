@@ -15,11 +15,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Make application-prod.properties
+    - name: Make application-prod.yml
       run: |
         cd ./src/main/resources
         touch ./application.properties
-        echo "${{ secrets.PROPERTIES }}" > ./application.properties
+        echo "${{ secrets.APPLICATION_YML }}" > ./application.yml
       shell: bash
       
     - name: Build with Maven
