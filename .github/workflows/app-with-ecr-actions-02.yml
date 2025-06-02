@@ -57,9 +57,6 @@ jobs:
       - name: Create Short SHA
         run: echo "Short_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
-      - name: Check Short_SHA
-        run: echo "Short SHA is ${{ env.Short_SHA }}"
-
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:${{ env.Short_SHA }} .
@@ -80,8 +77,8 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
+            unzip -o awscliv2.zip
+            sudo ./aws/install --update
   
       - name: Configure AWS credentials using environment variables
         uses: appleboy/ssh-action@v1.2.2
