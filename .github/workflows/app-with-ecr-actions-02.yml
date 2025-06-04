@@ -79,6 +79,9 @@ jobs:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip -o awscliv2.zip
             sudo ./aws/install --update
+
+      - name: Set Short SHA
+        run: echo "Short_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
   
       # - name: Configure AWS credentials using environment variables
       #   uses: appleboy/ssh-action@v1.2.2
