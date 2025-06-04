@@ -100,7 +100,7 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             aws ecr get-login-password --region ${{ secrets.REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.REGION }}.amazonaws.com
-            docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.REGION }}.amazonaws.com/${{ env.Short_SHA }}
+            docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.REGION }}.amazonaws.com/ecr-cicd:${{ env.Short_SHA }}
   
       - name: Restart container and cleanup
         uses: appleboy/ssh-action@v1.2.2
