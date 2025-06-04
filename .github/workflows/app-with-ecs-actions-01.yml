@@ -75,7 +75,7 @@ jobs:
           ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
           IMAGE_TAG: ${{ env.IMAGE_TAG }}
         run: |
-          aws ecs describe-task-definition --task-definition first-ecs-task-test-01 --query taskDefinition > task-definition.json
+          aws ecs describe-task-definition --task-definition cicd-task:1 --query taskDefinition > task-definition.json
           cat task-definition.json
           echo "task-def-file=task-definition.json" >> $GITHUB_OUTPUT
 
