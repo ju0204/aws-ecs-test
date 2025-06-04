@@ -29,7 +29,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
           
-      - name: Create application-prod.properties
+      - name: Create application.properties
         run: |
           cd ./src/main/resources
           touch ./application.properties
