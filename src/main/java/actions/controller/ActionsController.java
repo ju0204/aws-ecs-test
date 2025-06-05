@@ -12,7 +12,7 @@ public class ActionsController {
 		return "app-with-actions version:0.0.1";
 	}
 
-	@GetMapping("/")
+	@GetMapping("/health")
     	public ResponseEntity<String> healthCheck() {
         	// 항상 200 OK를 반환해서 헬스체크 성공 처리
         	return ResponseEntity.ok("OK");
