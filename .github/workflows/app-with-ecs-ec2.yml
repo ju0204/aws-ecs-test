@@ -71,7 +71,7 @@ jobs:
         id: retrieve-task-def
         run: |
           aws ecs describe-task-definition \
-          --task-definition cicd-task \
+          --task-definition task-definition\
           --query taskDefinition > task-definition.json
           echo "task-def-file=task-definition.json" >> $GITHUB_OUTPUT
 
