@@ -13,9 +13,11 @@ public class ActionsController {
 	}
 
 	@GetMapping("/health")
-    	public ResponseEntity<String> healthCheck() {
+	public String healthCheck() {
+    	// public ResponseEntity<String> healthCheck() {
         	// 항상 200 OK를 반환해서 헬스체크 성공 처리
-        	return ResponseEntity.ok("OK");
+        	// return ResponseEntity.ok("OK");
+		return "I'm alive";
     	}
 	
 }
