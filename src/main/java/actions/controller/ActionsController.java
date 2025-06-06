@@ -9,7 +9,7 @@ public class ActionsController {
 	
 	@GetMapping(value = "/api/actions")
 	public String actionsTest() {
-		return "app-with-actions version:0.0.1";
+		return "app-with-actions version:0.0.2";
 	}
 
 	@GetMapping("/health")
