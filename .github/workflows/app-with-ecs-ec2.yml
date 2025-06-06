@@ -70,10 +70,11 @@ jobs:
       - name: ECS task definition JSON file
         id: retrieve-task-def
         run: |
-          aws ecs describe-task-definition \
-          --task-definition cicd-task\
-          --query taskDefinition > task-definition.json
-          echo "task-def-file=task-definition.json" >> $GITHUB_OUTPUT
+          run: |
+            aws ecs describe-task-definition \
+            --task-definition cicd-task \
+            --query taskDefinition > task-definition.json
+            echo "task-def-file=task-definition.json" >> $GITHUB_OUTPUT
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
@@ -82,7 +83,14 @@ jobs:
           task-definition: ${{ steps.retrieve-task-def.outputs.task-def-file }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
-    
+
+      - name: Set deployment config to avoid port conflict
+        run: |
+          aws ecs update-service \
+            --cluster ${{ env.ECS_CLUSTER }} \
+            --service ${{ env.ECS_SERVICE }} \
+            --deployment-configuration minimumHealthyPercent=0,maximumPercent=200
+      
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
